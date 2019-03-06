@@ -14,6 +14,10 @@ x <- read.csv("path/to/file", sep="separatore")
 # leggere sorgente R
 source("path/to/file.R")
 
+# installare pacchetto e usare una libreria
+install.packages("name")
+library("name")
+
 # frequenze assolute, sopra valori e sotto frequenze
 # x può anche essere una sola colonna del database
 table(x)
@@ -97,4 +101,37 @@ var(x)
 # deviazione standard
 sd(x)
 sqrt(var(x))
+
+# quantili
+quantile(x,c(0.25,0.5,0.75))
+
+# range interquantile
+IQR(x)
+
+# range (min, max)
+range(x)
+
+# libreria indici di forma
+install.packages("e1071")
+library("e1071")
+
+# asimmetria
+skewness(x)
+[1] 0.3226639
+2 * sqrt(6/length(x))
+[1] 0.5477226
+
+# curtosi
+kurtosis(x)
+[1] -0.8020067
+4 * sqrt(6/length(x))
+[1] 1.095445
+```
+
+<p align="center">
+  <img width = "500" height="250" src="img/forma.png">
+</p>
+
+```R
+
 ```
