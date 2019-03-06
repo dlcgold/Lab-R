@@ -1,4 +1,4 @@
-# R cheatsheet
+# R CheatSheet
 
 ```R
 # caricare un file con gui
