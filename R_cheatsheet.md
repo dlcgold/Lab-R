@@ -14,9 +14,21 @@ x <- read.csv("path/to/file", sep="separatore")
 # leggere sorgente R
 source("path/to/file.R")
 
+# collegare database al path di R
+attach(x)
+
+# scollegare database dal path di R
+detach(x)
+
 # installare pacchetto e usare una libreria
 install.packages("name")
 library("name")
+
+# per stampare il risultato di R
+print(x)
+
+# per stampare  una variabile, volendo con descrizione
+cat("descrizione", x, "descrizione")
 
 # frequenze assolute, sopra valori e sotto frequenze
 # x può anche essere una sola colonna del database
@@ -86,8 +98,8 @@ sort(x)
 sort(x, dec = T)
 
 # media
-mean(x)
-
+media <- mean(x)
+print(media)
 # mediana
 median(x)
 
@@ -132,6 +144,6 @@ kurtosis(x)
   <img width = "500" height="250" src="img/forma.png">
 </p>
 
-```R
-
-```
+<p align="center">
+  <img width = "500" height="250" src="img/forma2.png">
+</p>
