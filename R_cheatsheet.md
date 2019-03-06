@@ -129,15 +129,11 @@ library("e1071")
 
 # asimmetria
 skewness(x)
-[1] 0.3226639
-2 * sqrt(6/length(x))
-[1] 0.5477226
+2 * sqrt(6 / length(x))
 
 # curtosi
 kurtosis(x)
-[1] -0.8020067
-4 * sqrt(6/length(x))
-[1] 1.095445
+4 * sqrt(6 / length(x))
 ```
 
 <p align="center">
@@ -147,3 +143,47 @@ kurtosis(x)
 <p align="center">
   <img width = "500" height="250" src="img/forma2.png">
 </p>
+
+### Caratteri Bidimensionali
+
+```R
+# frequenze assolute
+tc <- table(x)
+
+# tabella di contingenza con distribuzioni assolute marginali
+tcc <- cbind(tc, margin.table(tc,1)) # marginale stanze
+rbind(tcc, margin.table(tcc,2)) # marginale occupanti
+
+# frequenze relative
+tcr <- prop.table(table(x))
+
+# tabella di contingenza con distribuzioni relative marginali
+tccr <- cbind(tcr,margin.table(tcr,1)) # marginale stanze
+rbind(tccr,margin.table(tccr,2)) # marginale occupanti
+
+# bubbleplot (install.packages("labstatR")) prende in automatico le etichette
+require("labstatR")
+bubbleplot(tc)
+```
+
+<p align="center">
+  <img width = "350" height="350" src="img/bubble.png">
+</p>
+
+```R
+# scatterplot
+plot(x$valoriX, x$valoriY, xlab="x", ylab="y", main="Titolo")
+```
+<p align="center">
+  <img width = "350" height="350" src="img/scat.png">
+</p>
+
+```R
+# barplot con legenda (dotata di posizione e titolo), colori col dati da un array di colori
+barplot(table(x),legend=TRUE,col = c("lightblue", "mistyrose", "lightcyan","lavender","cornsilk"),xlab="x",ylab="y",args.legend=list(x="topright",title="legenda"))
+```
+<p align="center">
+  <img width = "350" height="350" src="img/barcol.png">
+</p>
+
+<!--- arrivato a slide 22 -->
