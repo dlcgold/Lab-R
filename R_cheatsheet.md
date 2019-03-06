@@ -9,7 +9,7 @@ x <- scan(f, sep = "separatore dati")
 x <- scan("path/to/file", sep = "separatore dati", dec = "separatore decimali")
 
 # oppure per leggere csv
-x <- read.csv("path/to/file", sep="separatore", comment.char="simbolo commento")
+x <- read.csv("path/to/file", sep="separatore")
 
 # leggere sorgente R
 source("path/to/file.R")
