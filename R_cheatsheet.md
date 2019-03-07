@@ -1,5 +1,7 @@
 # R CheatSheet
 
+## Statistica Descrittiva
+### Introduzione
 ```R
 # caricare un file con gui
 f <- file.choose()
@@ -226,4 +228,20 @@ abline(rr, col="colore", lwd=2)
   <img width = "350" height="350" src="img/reg.png">
 </p>
 
-#### fino a slide 27
+### Regressione non Lineare
+
+```R
+# retta di regressione (richiamare rrnl farà stampare i 
+# dati  della retta)
+rrnl <- lm(x$valore2.y. ~ 1 + x$valore1.x. + I(x$valore1.x.^2))
+
+# si può usare in alternativa
+lm(x$valore2.y. ~ poly(x$valore1.x.,2, raw = TRUE))
+
+# grafico della regressione non lineare
+plot(x$valore1.x., x$valore2.y.,xlab="x",ylab="y")
+lines(x$valore1.x., predict(rrnl),col="green",lwd=2)
+```
+<p align="center">
+  <img width = "350" height="350" src="img/regnl.png">
+</p>
