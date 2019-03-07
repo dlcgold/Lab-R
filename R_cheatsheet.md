@@ -245,3 +245,5 @@ lines(x$valore1.x., predict(rrnl),col="green",lwd=2)
 <p align="center">
   <img width = "350" height="350" src="img/regnl.png">
 </p>
+
+<!-- fino a slide 33  -->
