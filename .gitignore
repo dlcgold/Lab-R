@@ -256,11 +256,5 @@ TSWLatexianTemp*
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-#statistica
-teoria1.pdf
-teoria2.pdf
-teoria3.pdf
-teoria4.pdf
-esempio1.1.csv
-esempio1.2.csv
+
 # End of https://www.gitignore.io/api/java
