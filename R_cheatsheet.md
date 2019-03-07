@@ -215,14 +215,21 @@ cov(x$valore1.x.,x$valore2.y.) /
  (sd(x$valore1.x.) * sd(x$valore2.y.))
 
 # retta di regressione (richiamare rr farà stampare i 
-# dati  della retta)
+# dati  della retta), rr è una classe coi dati della regressione
 rr <- lm(x$valore2.y.~ x$valore1.x.)
 
+# per accedere direttamente ai coefficienti
+coefficients(rr)
+
 # grafico della regressione 
-# prima lo scatterplot
+# prima lo scatterplot (con x$valore acedo ai dati "valore" 
+# del dataset x, ma possono essere semplici vettori)
 plot(x$valore1.x., x$valore2.y.,xlab="x",ylab="y", main="titolo")
-# poi la retta (lwd larghezza linea, col = colore, esplicito o in hex)
+
+# poi la retta (lwd larghezza linea,
+# col = colore, esplicito o in hex)
 abline(rr, col="colore", lwd=2)
+
 ```
 <p align="center">
   <img width = "350" height="350" src="img/reg.png">
