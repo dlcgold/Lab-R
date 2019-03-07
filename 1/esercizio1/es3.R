@@ -19,6 +19,7 @@ cat("\n")
 cat("ecco il barplot:\n")
 barplot(table(role, years),legend=TRUE,
 	col = c("lightblue", "mistyrose", "lightcyan", "lavender", "cornsilk"), 
-	xlab = "Età", ylab = "Frequenze", args.legend = list(x = "topright",title = "Ruoli"))
+	xlab = "Età", ylab = "Frequenze", 
+	args.legend = list(x = "topright",title = "Ruoli"))
 
 detach(es)
