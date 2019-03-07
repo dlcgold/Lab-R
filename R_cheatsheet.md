@@ -186,4 +186,10 @@ barplot(table(x),legend=TRUE,col = c("lightblue", "mistyrose", "lightcyan","lave
   <img width = "350" height="350" src="img/barcol.png">
 </p>
 
-<!--- arrivato a slide 22 -->
+```R
+# covarianza
+cov(x$valore1,x$valore2)
+
+# correlazione
+cor(x$valore1,x$valore2)
+```
