@@ -9,7 +9,7 @@ x <- scan(f, sep = "separatore dati")
 x <- scan("path/to/file", sep = "separatore dati", dec = "separatore decimali")
 
 # oppure per leggere csv
-x <- read.csv("path/to/file", sep="separatore")
+x <- read.csv("path/to/file", sep="separatore", header=TRUE)
 
 # leggere sorgente R
 source("path/to/file.R")
@@ -193,3 +193,37 @@ cov(x$valore1,x$valore2)
 # correlazione
 cor(x$valore1,x$valore2)
 ```
+
+### Regressione Lineare
+
+```R
+# scarto quadratico medio x
+sqrt(mean((x$valore1.x. - mean(x$valore1.x.))^2))
+
+# scarto quadratico medio x
+sqrt(mean((x$valore2.y. - mean(x$valore2.y.))^2))
+
+# covarianza
+mean((x$valore1.x. - mean(x$valore1.x.)) * 
+ (x$valore2.y. -  mean(x$valore2.y.)))
+
+
+# correlazione
+cov(x$valore1.x.,x$valore2.y.) / 
+ (sd(x$valore1.x.) * sd(x$valore2.y.))
+
+# retta di regressione (richiamare rr farà stampare i 
+# dati  della retta)
+rr <- lm(x$valore2.y.~ x$valore1.x.)
+
+# grafico della regressione 
+# prima lo scatterplot
+plot(x$valore1.x., x$valore2.y.,xlab="x",ylab="y", main="titolo")
+# poi la retta (lwd larghezza linea, col = colore, esplicito o in hex)
+abline(rr, col="colore", lwd=2)
+```
+<p align="center">
+  <img width = "350" height="350" src="img/reg.png">
+</p>
+
+#### fino a slide 27
