@@ -1,5 +1,5 @@
 #leggo il file
-es <- read.csv("~/Lab-R/1/esercizio1/Giocatori.txt", sep = ";")
+es <- read.delim("~/Lab-R/laboratorio/statistica_descrittiva/esercizi/Giocatori.txt", sep = ";")
 attach(es)
 
 cat("Riferendoci a years  si ha che:\n")
