@@ -253,4 +253,120 @@ lines(x$valore1.x., predict(rrnl),col="green",lwd=2)
   <img width = "350" height="350" src="img/regnl.png">
 </p>
 
-<!-- fino a slide 33  -->
+## Calcolo delle Probabilità
+
+```R
+# creazione spazio campione
+
+#carico la libreria
+install.packages("prob")
+library(prob)
+
+# con una variabile specifica credo una spazio campione
+tosscoin
+cards
+rolldie
+urnsamples
+
+# assegno i casi allo spazio campione,per esempio per le 
+# facce delle monete
+t <- tosscoin(2)
+
+#per un dado a sei facce
+r <- rolldie(1)
+
+# spazio campione (primi 6 elementi) di un mazzo composto
+# da 52 carte
+
+c <- cards()
+head(c)
+
+# spazio campione di un’urna di 3 palline numerate da 1 a 3 
+# con estrazione 2 palline, prima il range, poi il numero di 
+# estrazioni, poi se possono essere ripetute e infine se 
+# possono essere ordinate
+u <- urnsamples(1:3, size = 2, replace = TRUE, ordered = TRUE)
+
+# posso accedere a determinati sottoelementi, 
+# per esempio il 2 e il 4
+u[c(2,4),]
+
+# accedere a sottoinsiemi con funzione subset
+# estrarre solo le carte di seme Spade
+x<- subset(c, suit == "Spade")
+
+# %in%
+# estrarre solo le carte 5 e 6
+subset(c, rank %in% 5:6)
+# oppure
+subset(c,rank==6 | rank==5)
+
+# isin() ritorna TRUE se gli elementi di y sono tutti in x, 
+# con ordered = TRUE anche tnendo conto dell'ordine
+isin(x, y, ordered = FALSE)
+
+# sottoinsiemi con espressioni matematiche
+# somma delle facce dei 3 dadi maggiore di 14
+subset(rolldie(3), X1+X2+X3>14)
+# somma delle due facce sia numero pari (%% è il modulo)
+subset(rolldie(2), ((X1+X2)%%2)==0)
+# faccia del primo dado maggiore di quella del secondo
+subset(rolldie(2), (X1>X2))
+```
+### insiemistica
+```R
+# Unione di due subset A, B
+union(A,B)
+# Intersezione tra A, B
+intersect(A,B)
+# Differenza tra A, B
+setdiff(A,B)
+
+# isrep(oggetto, valore, ripetizione)
+# verifica se in un vettore N compare n volte il valore 
+# funziona con numeri e stringhe
+isrep(N,vals=valore,nrep=n)
+```
+
+### spazio di probabilità
+```R
+# Spazio di probabilità, l'opzione monospace la hanno
+# tosscoin, cards e rolldie
+tosscoin(2 ,makespace=TRUE)
+
+# Spazio di probabilità
+# probspace(spazio campione, probabilità)
+# analogo a rolldie(1,makespace=TRUE)
+outcome=rolldie(1)
+p=rep(1/6, times=6)
+probspace(outcome, probs=p)
+
+# moneta sbilancata
+probspace(tosscoin(1), probs=c(0.3,0.7))
+
+# oppure
+iidspace(c("H","T"), ntrials = 1, probs = c(0.3,0.7))
+
+# Calcolare la probabilità di un evento
+# Prob(spazio di probabilità, evento)
+S <-cards(makespace=TRUE)
+A <-subset(S, suit==“Heart”)
+Prob(A)
+
+# più semplicemente
+Prob(S, suit==“Heart”)
+```
+### permutazioni
+
+```R
+# fattoriale di n
+factorial(n)
+
+# ripetetizioni in sequenza di x n volte
+rep(x, n)
+
+# Combinazioni semplici
+# choose(n,k)
+# numero di combinazioni di x elementi presi a gruppi di y
+choose(x, y)
+```
