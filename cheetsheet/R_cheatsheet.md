@@ -1,7 +1,9 @@
 # R CheatSheet
 
 ## Statistica Descrittiva
+
 ### Introduzione
+
 ```r
 # caricare un file con gui
 f <- file.choose()
@@ -48,6 +50,7 @@ cumsum(prop.table(table(x))
 # istogramma con frequenze assolute, su x i dati e su y le frequenze 
 barplot(table(x), xlab="etichetta x", ylab="etichetta ", main="titolo")
 ```
+
 <p align="center">
   <img width="250" height="250" src="img/barplot.png">
 </p>
@@ -56,6 +59,7 @@ barplot(table(x), xlab="etichetta x", ylab="etichetta ", main="titolo")
 # grafico a stack con frequenze assolute, su x i dati e su y le frequenze 
 stripchart(x, method = "stack", xlab = "etichetta x", ylab = "etichetta ", main="titolo")
 ```
+
 <p align="center">
   <img width="250" height="250" src="img/stripchart.png">
 </p>
@@ -71,6 +75,7 @@ array <- c(0.4, 1.5, 2.3, 3, 4, 5.5)
 # istrogramma con step dato da un array
 hist(x, breaks = array, xlab = "etichetta x", ylab = "etichetta ", main = "titolo")
 ```
+
 <p align="center">
   <img width="250" height="250" src="img/histstep.png">
 </p>
@@ -80,6 +85,7 @@ hist(x, breaks = array, xlab = "etichetta x", ylab = "etichetta ", main = "titol
 
 hist(x, xlab = "etichetta x", ylab = "etichetta ", main = "titolo")
 ```
+
 <p align="center">
   <img width = "250" height="250" src="img/histauto.png">
 </p>
@@ -88,9 +94,11 @@ hist(x, xlab = "etichetta x", ylab = "etichetta ", main = "titolo")
 # scatterplot
 plot(x, xlab = "x", ylab = "y", main = "titolo")
 ```
+
 <p align="center">
   <img width = "250" height="250" src="img/scatter.png">
 </p>
+![](img/scatter.png)
 
 ```r
 # ordinamento crescente
@@ -176,6 +184,7 @@ bubbleplot(tc)
 # scatterplot
 plot(x$valoriX, x$valoriY, xlab="x", ylab="y", main="Titolo")
 ```
+
 <p align="center">
   <img width = "350" height="350" src="img/scat.png">
 </p>
@@ -184,6 +193,7 @@ plot(x$valoriX, x$valoriY, xlab="x", ylab="y", main="Titolo")
 # barplot con legenda (dotata di posizione e titolo), colori col dati da un array di colori
 barplot(table(x),legend=TRUE,col = c("lightblue", "mistyrose", "lightcyan","lavender","cornsilk"),xlab="x",ylab="y",args.legend=list(x="topright",title="legenda"))
 ```
+
 <p align="center">
   <img width = "350" height="350" src="img/barcol.png">
 </p>
@@ -229,8 +239,8 @@ plot(x$valore1.x., x$valore2.y.,xlab="x",ylab="y", main="titolo")
 # poi la retta (lwd larghezza linea,
 # col = colore, esplicito o in hex)
 abline(rr, col="colore", lwd=2)
-
 ```
+
 <p align="center">
   <img width = "350" height="350" src="img/reg.png">
 </p>
@@ -249,6 +259,7 @@ lm(x$valore2.y. ~ poly(x$valore1.x.,2, raw = TRUE))
 plot(x$valore1.x., x$valore2.y.,xlab="x",ylab="y")
 lines(x$valore1.x., predict(rrnl),col="green",lwd=2)
 ```
+
 <p align="center">
   <img width = "350" height="350" src="img/regnl.png">
 </p>
@@ -313,7 +324,9 @@ subset(rolldie(2), ((X1+X2)%%2)==0)
 # faccia del primo dado maggiore di quella del secondo
 subset(rolldie(2), (X1>X2))
 ```
+
 ### insiemistica
+
 ```r
 # Unione di due subset A, B
 union(A,B)
@@ -329,6 +342,7 @@ isrep(N,vals=valore,nrep=n)
 ```
 
 ### spazio di probabilità
+
 ```r
 # Spazio di probabilità, l'opzione monospace la hanno
 # tosscoin, cards e rolldie
@@ -356,6 +370,7 @@ Prob(A)
 # più semplicemente
 Prob(S, suit==“Heart”)
 ```
+
 ### permutazioni
 
 ```r
