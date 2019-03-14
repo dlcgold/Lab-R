@@ -2,7 +2,7 @@
 
 ## Statistica Descrittiva
 ### Introduzione
-```R
+```r
 # caricare un file con gui
 f <- file.choose()
 x <- scan(f, sep = "separatore dati")
@@ -52,7 +52,7 @@ barplot(table(x), xlab="etichetta x", ylab="etichetta ", main="titolo")
   <img width="250" height="250" src="img/barplot.png">
 </p>
 
-```R
+```r
 # grafico a stack con frequenze assolute, su x i dati e su y le frequenze 
 stripchart(x, method = "stack", xlab = "etichetta x", ylab = "etichetta ", main="titolo")
 ```
@@ -60,7 +60,7 @@ stripchart(x, method = "stack", xlab = "etichetta x", ylab = "etichetta ", main=
   <img width="250" height="250" src="img/stripchart.png">
 </p>
 
-```R
+```r
 # minimo e massimo
 min(x)
 max(x)
@@ -75,7 +75,7 @@ hist(x, breaks = array, xlab = "etichetta x", ylab = "etichetta ", main = "titol
   <img width="250" height="250" src="img/histstep.png">
 </p>
 
-```R
+```r
 # istrogramma con intervalli automatici
 
 hist(x, xlab = "etichetta x", ylab = "etichetta ", main = "titolo")
@@ -84,7 +84,7 @@ hist(x, xlab = "etichetta x", ylab = "etichetta ", main = "titolo")
   <img width = "250" height="250" src="img/histauto.png">
 </p>
 
-```R
+```r
 # scatterplot
 plot(x, xlab = "x", ylab = "y", main = "titolo")
 ```
@@ -92,7 +92,7 @@ plot(x, xlab = "x", ylab = "y", main = "titolo")
   <img width = "250" height="250" src="img/scatter.png">
 </p>
 
-```R
+```r
 # ordinamento crescente
 sort(x)
 
@@ -148,7 +148,7 @@ kurtosis(x)
 
 ### Caratteri Bidimensionali
 
-```R
+```r
 # frequenze assolute
 tc <- table(x)
 
@@ -172,7 +172,7 @@ bubbleplot(tc)
   <img width = "350" height="350" src="img/bubble.png">
 </p>
 
-```R
+```r
 # scatterplot
 plot(x$valoriX, x$valoriY, xlab="x", ylab="y", main="Titolo")
 ```
@@ -180,7 +180,7 @@ plot(x$valoriX, x$valoriY, xlab="x", ylab="y", main="Titolo")
   <img width = "350" height="350" src="img/scat.png">
 </p>
 
-```R
+```r
 # barplot con legenda (dotata di posizione e titolo), colori col dati da un array di colori
 barplot(table(x),legend=TRUE,col = c("lightblue", "mistyrose", "lightcyan","lavender","cornsilk"),xlab="x",ylab="y",args.legend=list(x="topright",title="legenda"))
 ```
@@ -188,7 +188,7 @@ barplot(table(x),legend=TRUE,col = c("lightblue", "mistyrose", "lightcyan","lave
   <img width = "350" height="350" src="img/barcol.png">
 </p>
 
-```R
+```r
 # covarianza
 cov(x$valore1,x$valore2)
 
@@ -198,7 +198,7 @@ cor(x$valore1,x$valore2)
 
 ### Regressione Lineare
 
-```R
+```r
 # scarto quadratico medio x
 sqrt(mean((x$valore1.x. - mean(x$valore1.x.))^2))
 
@@ -237,7 +237,7 @@ abline(rr, col="colore", lwd=2)
 
 ### Regressione non Lineare
 
-```R
+```r
 # retta di regressione (richiamare rrnl farà stampare i 
 # dati  della retta)
 rrnl <- lm(x$valore2.y. ~ 1 + x$valore1.x. + I(x$valore1.x.^2))
@@ -255,7 +255,7 @@ lines(x$valore1.x., predict(rrnl),col="green",lwd=2)
 
 ## Calcolo delle Probabilità
 
-```R
+```r
 # creazione spazio campione
 
 #carico la libreria
@@ -314,7 +314,7 @@ subset(rolldie(2), ((X1+X2)%%2)==0)
 subset(rolldie(2), (X1>X2))
 ```
 ### insiemistica
-```R
+```r
 # Unione di due subset A, B
 union(A,B)
 # Intersezione tra A, B
@@ -329,7 +329,7 @@ isrep(N,vals=valore,nrep=n)
 ```
 
 ### spazio di probabilità
-```R
+```r
 # Spazio di probabilità, l'opzione monospace la hanno
 # tosscoin, cards e rolldie
 tosscoin(2 ,makespace=TRUE)
@@ -358,7 +358,7 @@ Prob(S, suit==“Heart”)
 ```
 ### permutazioni
 
-```R
+```r
 # fattoriale di n
 factorial(n)
 
