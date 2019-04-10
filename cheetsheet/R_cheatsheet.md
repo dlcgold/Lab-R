@@ -394,7 +394,7 @@ forse manca una parte
 inclusi nel package stats abbiamo le più importanti distribuzioni discrete:
 
 <p align="center">
-  <img width = "450" height="100" src="img/dis.png">
+  <img width = "500" height="150" src="img/dis.png">
 </p>
 
 ### Distribuzione binomiale
