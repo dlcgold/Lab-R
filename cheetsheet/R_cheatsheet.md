@@ -385,3 +385,101 @@ rep(x, n)
 # numero di combinazioni di x elementi presi a gruppi di y
 choose(x, y)
 ```
+
+forse manca una parte 
+
+
+## Distribuzioni Notevoli Discrete
+
+inclusi nel package stats abbiamo le più importanti distribuzioni discrete:
+
+<p align="center">
+  <img width = "450" height="100" src="img/dis.png">
+</p>
+
+### Distribuzione binomiale
+
+per la binomiale si ha:
+ 
+```r
+dbinom(x, y, prob = z)
+```
+vediamo un esempio: 
+
+```r
+# Quattro monete bilanciate vengono lanciate. 
+# Assumendo l’indipendenza dei risultati,
+# qual è la probabilità di ottenere due testa e due croce?
+
+dbinom(2,4,prob=1/2)
+
+# Disegnare la distribuzione di probabilità della 
+# variabile binomiale: X = “numero
+# di volte in cui compare testa”, lanciando 4 volte 
+# una moneta bilanciata
+plot(c(0:4),dbinom(0:4,4,prob=1/2),type="h",xlab="X")
+lines(c(0:4),dbinom(0:4,4,prob=0.5) ,lty=5,col="red")
+text(c(0:4), dbinom(0:4,4,prob=0.5),dbinom(0:4,4,prob=0.5))
+```
+<p align="center">
+  <img width = "350" height="350" src="img/bin.png">
+</p>
+
+
+```r
+# impostare il grafico
+plot(0, xlim = c(-0.2, 4.2), ylim = c(-0.04, 1.04), type = "n", xlab = "X", ylab =
+"Probabilità cumulata")
+
+# disegnare due linee orizzontali che limitano la y
+abline(h = c(0,1), lty = 2, col = "grey")
+
+# disegnare una funzione a gradini
+lines(stepfun(0:4, pbinom(-1:4, size = 4, prob = 0.5)), verticals = FALSE, do.p
+= FALSE)
+
+# disegnare i punti estremi
+points(0:4, pbinom(0:4, size = 4, prob = 0.5), pch = 16, cex = 1.2)
+points(0:4, pbinom(-1:3, size = 4, prob = 0.5), pch = 1, cex = 1.2)
+```
+
+<p align="center">
+  <img width = "350" height="350" src="img/scala.png">
+</p>
+
+### Distribuzione di Poisson
+
+Per Poisson si ha:
+
+```r
+ppois(x, lambda = y, options)
+```
+
+se ho un problema che richiede "almeno" qualcosa uso 
+l'opzione _lower.t = FALSE_, se richiede "al più" no
+uso nessuna opzione, di default si ha _lower.t = TRUE_
+
+Vediamo ora un esempio per tracciare un grafico con Poisson,
+con lambda = 1:
+
+```r
+plot(c(0:5),dpois(0:5,1),type="h",xlab="X")
+text(c(0:5), dpois(0:5,1), round(dpois(0:5,1),4))
+```
+<p align="center">
+  <img width = "350" height="350" src="img/poi.png">
+</p>
+
+### Distribuzione Geometrica
+
+Per la geometrica si ha:
+
+```r
+dgeom(x, prob = y, options)
+```
+## Distribuzioni notevoli Continue
+
+Sono sempre incluse in stats:
+<p align="center">
+  <img width = "450" height="100" src="img/con.png">
+</p>
