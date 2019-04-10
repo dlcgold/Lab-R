@@ -483,3 +483,106 @@ Sono sempre incluse in stats:
 <p align="center">
   <img width = "450" height="100" src="img/con.png">
 </p>
+
+inoltre il package distr contiene classi per molte altre distribuzioni:
+
+<p align="center">
+  <img width = "400" height="300" src="img/distr.png">
+</p>
+
+### Distribuzione uniforme
+
+```r
+punif(x, min, max, options)
+```
+vediamo il grafico:
+
+```r
+library(distr)
+X <- Unif(Min = 0, Max = 30)
+plot(X, to.draw.arg=c("d","p"))
+```
+
+<p align="center">
+  <img width = "500" height="300" src="img/unif.png">
+</p>
+
+per generare n numeri in una distribuzione uniforme tra min e max:
+
+```r
+runif(n, min, max)
+```
+
+### Distribuzione Esponenziale
+
+```r
+pexp(m, lambda, options)
+```
+
+per disegnare scarico il package distr e ne carico la libreria
+poi:
+
+```r
+plot(Exp(rate = 0.2), to.draw.arg = c("d","p"))
+```
+
+<p align="center">
+  <img width = "500" height="300" src="img/exp.png">
+</p>
+
+### Distribuzione Normale
+
+Per la normale si ha:
+
+<p align="center">
+  <img width = "500" height="100" src="img/norm.png">
+</p>
+
+Cerco la normale in [a,b] con media = m e deviazione standard = s:
+
+```r
+pnorm(b, mean = m, sd = s) - pnorm(a, mean = m, sd = s)
+```
+
+passiamo al disegno, sempre usando distr, con m = 100 e s = 15:
+
+```r
+X <- Norm(mean = 100, sd = 15)
+> plot(X, to.draw.arg=c("d","p"))
+```
+<p align="center">
+  <img width = "500" height="300" src="img/norm2.png">
+</p>
+
+generiamo n numeri in una normale standardizzata:
+
+```r
+rand <- rnorm(n)
+
+# che possono essere messi in un istogramma
+
+hist(rand)
+```
+<p align="center">
+  <img width = "400" height="300" src="img/norm3.png">
+</p>
+
+per i quantili uso (se chiede 1% x sarà 0.99):
+
+```r
+qnorm(x, mean = m, sd = s)
+```
+
+## Chi-Quadro, t di Student e F di fisher
+
+<p align="center">
+  <img width = "500" height="100" src="img/ot.png">
+</p>
+
+funzionano con x indicante l'area di cui si vuole calcolare
+(se chiede di trovare t tale per cui l'area a destra è 0.05 x sarà 0.95 etc...) 
+e con df = g gradi di liberà:
+
+```r
+qt(x, df = g)
+```
