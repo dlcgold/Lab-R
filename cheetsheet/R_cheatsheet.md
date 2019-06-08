@@ -586,3 +586,344 @@ e con df = g gradi di liberà:
 ```r
 qt(x, df = g)
 ```
+## STIME DI PARAMETRI
+
+Si usa:
+```r
+library(TeachingDemos)
+```
+
+### STIME INTERVALLARI
+
+Vediamo innanzitutto le stime intervallari, conm gli intervalli di confidenza per la media:
+
+- ***popolazione non normalmente distribuita e varianza sconosciuta:***
+  nell'esempio con livello di confidenza al 95% e un plot di dati x:
+  ```r
+  z.test(x, mu = 0, stdev, alternative = c("two.sided", "less", "greater"), sd =
+  stdev, n=length(x), conf.level = 0.95, ...))
+  ```
+- ***popolazione normalmente distribuita e varianza sconosciuta:***
+  nell'esempio con livello di confidenza al 95%
+  ```r
+  t.test(x, y = NULL, alternative = c("two.sided", "less", "greater"), mu = 0,
+  paired = FALSE, var.equal = FALSE, conf.level = 0.95, ...)
+  ```
+- ***popolazione non normalmente distribuita e varianza nota:***
+  nell'esempio con 100 valori, valore medio 82 e varianza 25, e livello di confidenza al 97%
+  ```r
+  out <- z.test(82,stdev=sqrt(25),alternative="two.sided",n=100,conf.level=0.97)
+  > out$conf.int
+  [1] 80.91495 83.08505
+  attr(,"conf.level")
+  [1] 0.97
+  ```
+  
+- ***popolazione normalmente distribuita e varianza nota:***
+  da un plot di dati *fr*, ovvero un array, con una deviazione standard pari a 30 e un livbello di confidenza del 95% ho.
+  ```r
+  out <- z.test(fr, stdev=30, alternative="two.sided",conf.level = 0.95)
+  > out
+  One Sample z-test
+  data: fr
+  z = 78.785, n = 15.000, Std. Dev. = 30.000, Std. Dev. of the sample mean = 7.746, p-value <
+  2.2e-16
+  alternative hypothesis: true mean is not equal to 0
+  95 percent confidence interval:
+  595.0849 625.4485
+  sample estimates:
+  mean of fr
+  610.2667
+  > out$conf.int
+  [1] 595.0849 625.4485
+  attr(,"conf.level")
+  [1] 0.95)
+  out$conf.int
+  [1] 595.0849 625.4485
+  attr(,"conf.level")
+  [1] 0.95)
+  ```
+in ogni caso il z.test deve essere caricato in una variabile, per esempio *out*
+da cui ottenere l'intervasllo con:
+```r
+out$conf.int
+```
+
+### STIME INTERVALLARI PER LA VARIANZA
+Si ha una popolazione normalmente distribuita e si usa, per esempio per un livello di confidenza del 95%, con sigma pari a 1 e plot di dati *x*:
+
+```r
+sigma.test(x, sigma = 1, sigmasq = sigma^2, alternative = c("two.sided",
+"less", "greater"), conf.level = 0.95, ...)
+```
+e come prima il sigma.test deve essere caricato in una variabile, per esempio *out*
+da cui ottenere l'intervallo con:
+```r
+out$conf.int
+```
+per la sigma si ricorda l'uso di *qnorm* per avere il test del Chi-Quadro, per esempio *qnorm(1-alpha/2)*
+
+nello studio delle stime intervallari può essere comoda la funzione *ceiling* che resitutisce l'intero per difetto dell'argomento.
+
+##  VERIFICA DI IPOTESI: TEST PARAMETRICI
+
+L'unico test di verifica che prevede l'introduzione di qualcosa di nuovo è il
+***test di incorrelazione***:
+```r
+cor.test(x, y, alternative = c("two.sided", "less", "greater"), method =
+c("pearson", "kendall", "spearman"), exact = NULL, conf.level =
+0.95, continuity = FALSE, ...)
+```
+che permette di scegliere il metodo, i dati sulla *x* e sulla *y* e il livello di confidenza.
+
+Per il resto si tratta solo di applicare quanto spiegato fino ad ora, si rimanda alle slide per gli esempi
+
+## VERIFICA DI IPOTESI: TEST NON PARAMETRICI
+
+Si introduce il test di ***Kolmogorov-Smirnov***, *x* e *y* plot di dati:
+```r
+ks.test(x, y, ...,alternative = c("two.sided", "less", "greater"), exact = NULL)
+```
+con *...* indicanti i parametri della distribuzione, per esempio *punif* (uniforme) con in aggiunta gli estremi della distribuzione, *pexp* (esponenziale) con il valore della lambda, e exact se si ha un p-value specifico.
+
+Si ha poi il test del ***Chi-Quadro***:
+```r
+chisq.test(x, y = NULL, correct = TRUE, p = rep(1/length(x), length(x)),
+rescale.p = FALSE, simulate.p.value = FALSE, B = 2000)
+```
+con correct che applica la correzione continua per tabelle 2x2, *p* vettore di probabilità
+di cardinalità pari a quella di *x* (si sfrutta qui rep che replica una cosa un tot di volte), 
+rescale.p che se true normalizza le probabilità di *p* per avere somma 1,
+simulate.p.value per indicare se si deve usare il metodo MonteCarlo per compuare il p-value e B che indica il numero di interazioni di MOnteCarlo.
+
+Si ha poi il ***test dei ranghi di Wilcoxon***:
+```r
+wilcox.test(x, y = NULL, alternative = c("two.sided", "less", "greater"), mu = 0,
+paired = FALSE, exact = NULL, correct = TRUE, conf.int = FALSE, conf.level =
+0.95, ...)
+```
+*mu* rappresenta il parametro opzionale per per l'ipotesi nulla, *paired* indica se si vuole il test dedicato, 
+*exact* se si vuole computareil p-value, *conf.int* se si vuole l'intervallo di condidenza
+e *conf.level* oer indicare il livello di confidenza.
+
+In tutti i casi sopra la *y* può essere omessa, nel caso bisimensionale, se *x* è una matrice.
+
+Per il ***coefficiente di correlazione dei ranghi di Spearman***:
+```r
+cor(x, y = NULL, use = "everything", method="spearman")
+```
+
+## REGRESSIONE LINEARE
+
+Per una regressione lineare semplice, con stima dei parametri di modello, si ha:
+```r
+lm(formula, data, subset, weights, na.action, method = "qr", model = TRUE, x
+= FALSE, y = FALSE, qr = TRUE, singular.ok = TRUE, contrasts = NULL,
+offset, ...)
+```
+vediamo un banale esempio:
+```r
+X <- c(-3, 4, 5, 8, 6)
+Y <- c(2, 6, 7, 10, 5)
+Rxy <- cor(X,Y,method="p")
+Rxy
+
+rr <- lm(Y ~ X)
+rr
+Call:
+lm(formula = Y ~ X)
+Coefficients:
+(Intercept) X
+3.5429    0.6143
+
+# coefficienti
+coeff <- rr$coefficients
+# creare grafico
+plot(Y ~ X)
+abline(coef(rr),col='red', lwd = 3)
+```
+e per la stima puntuale della variabile, per esempio per *Y* se il regressore *X* vale 5:
+```r
+new <- data.frame(X=5)
+predict(rr,new)
+1
+6.614286
+#stima puntuale della variabile risposta
+predict(rr)
+1        2        3        4        5
+1.700000 6.000000 6.614286 8.457143 7.228571
+```
+per i residui di un modello:
+```r
+residuals(rr)
+1            2            3            4             5
+3.000000e-01 6.522560e-16 3.857143e-01 1.542857e+00 -2.228571e+00
+```
+e per ntervalli di confidenza per i coefficienti di regressione, per esempio al 95%:
+```r
+confint(rr, level=0.95) # livello di fiducia 0.05
+            5 %         95 %
+(Intercept) 1.0930143   5.992700
+X           0.1670077   1.061564
+```
+per intervalli di confidenza per valori stimati della variabile risposta e intervalli di predizione:
+```r
+predict(object, newdata, se.fit = FALSE, scale = NULL, df = Inf, interval =
+c("none", "confidence", "prediction"), level = 0.95, type = c("response", "terms"),
+terms = NULL, na.action = na.pass, pred.var = res.var/weights, weights = 1, ...)
+
+# nel dettaglio
+
+# intervalli di confidenza
+predict(object,newdata,...interval=“confidence”,level = 0.95...)
+
+# intervalli di predizione
+predict(object,newdata,...interval=“prediction”,level = 0.95...)
+
+rappresentazione grafica degli intervalli di confidenza e degli intervalli di predizione
+> library(HH)
+> ci.plot(rr,conf.level=0.95)
+```
+
+<p align="center">
+  <img width = "350" height="250" src="img/rr.png">
+</p>
+
+passiamo allo studio dell'attendibilità del modello usando *summary* usando una variabile (nell'esempio *fm*) su cui sono stati caricati i risultati di *lm*:
+```r
+summary(fm)
+
+Call:
+lm(formula = Y ~ X)
+
+Residuals:
+       1        2        3        4        5 
+-0.04082  0.75510 -1.09184  0.11224  0.26531 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   6.6531     1.3559   4.907 0.016207 *  
+X             1.9490     0.1023  19.047 0.000316 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.7846 on 3 degrees of freedom
+Multiple R-squared:  0.9918,	Adjusted R-squared:  0.9891 
+F-statistic: 362.8 on 1 and 3 DF,  p-value: 0.000316
+```
+Vediamo infine i vari test dei residui, caricando i residui in una variabile con *residuals*:
+```r
+X <- c(-3, 4, 5, 8, 6)
+Y <- c(2, 6, 7, 10, 5)
+rr <- lm(Y ~ X)
+residui <- residuals(rr)
+```
+Iniziamo col test di normalità di ***Shapiro Wilk***:
+```r
+shapiro.test(residui)
+
+	Shapiro-Wilk normality test
+	data: residui
+	W = 0.89097, p-value = 0.362
+```
+poi si ha il test di incorrelazione di ***Durbin e Watson***:
+```r
+dwtest(rr, alternative="two.sided")
+	Durbin-Watson test
+	data: rr
+	DW = 2.0831, p-value = 0.6294
+	alternative hypothesis: true autocorrelation is not 0
+```
+
+quello di ***omoschedasticità*** con metodi grafici:
+```r
+plot(X,rr$residuals,xlab="X",ylab="RESIDUAL",main="Verifica Omoschedasticità ")
+abline(h=0)
+```
+<p align="center">
+  <img width = "350" height="250" src="img/om.png">
+</p
+
+e la ***distanza di Cock*** con gli *outliers*:
+```r
+cook <- cooks.distance(rr)
+cook
+	1            2            3            4            5
+	1.601695e+00 2.628942e-32 1.021151e-02 6.177966e-01 4.576271e-01
+plot(rr, main="Cook's Distance",which=4)
+```
+<p align="center">
+  <img width = "350" height="250" src="img/di.png">
+</p
+
+#### REGRESSIONE MULTILINEARE MULTIPLA
+
+Per la regressione multipla si ha:
+```r
+lm(formula, data, subset, weights, na.action, method = "qr", model = TRUE, x
+= FALSE, y = FALSE, qr = TRUE, singular.ok = TRUE, contrasts = NULL,
+offset, ...)
+```
+Vediamo un esempio completo (trees in R è un dataset con cirocnferenza, altezza e volume di 31 alberi di ciliegio):
+```r
+# coefficienti retta di regressione 
+
+trees.lm <- lm(Volume ~ Girth + Height, data = trees)
+trees.lm
+	Call:
+	lm(formula = Y ~ X)
+
+	Residuals:
+1        2        3        4        5 
+	-0.04082  0.75510 -1.09184  0.11224  0.26531 
+
+	Coefficients:
+Estimate Std. Error t value Pr(>|t|)    
+	(Intercept)   6.6531     1.3559   4.907 0.016207 *  
+	X             1.9490     0.1023  19.047 0.000316 ***
+	---
+	Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+	Residual standard error: 0.7846 on 3 degrees of freedom
+	Multiple R-squared:  0.9918,	Adjusted R-squared:  0.9891 
+	F-statistic: 362.8 on 1 and 3 DF,  p-value: 0.000316
+
+	> trees.lm <- lm(Volume ~ Girth + Height, data = trees)
+	> trees.lm
+
+	Call:
+	lm(formula = Volume ~ Girth + Height, data = trees)
+
+	Coefficients:
+	(Intercept)        Girth       Height
+	-57.9877       4.7082       0.3393
+
+# intervalli di confidenza
+confint(trees.lm)
+                     2.5 %      97.5 %
+	(Intercept) -75.68226247 -40.2930554
+	Girth         4.16683899   5.2494820
+	Height        0.07264863   0.6058538
+	
+#attendibilità del modello
+summary(trees.lm)
+	Call:
+	lm(formula = Volume ~ Girth + Height, data = trees)
+
+	Residuals:
+		Min      1Q  Median      3Q     Max 
+	-6.4065 -2.6493 -0.2876  2.2003  8.4847 
+
+	Coefficients:
+    Estimate Std. Error t value Pr(>|t|)    
+	(Intercept) -57.9877     8.6382  -6.713 2.75e-07 ***
+	Girth         4.7082     0.2643  17.816  < 2e-16 ***
+	Height        0.3393     0.1302   2.607   0.0145 *  
+	---
+	Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+	Residual standard error: 3.882 on 28 degrees of freedom
+	Multiple R-squared:  0.948,	Adjusted R-squared:  0.9442 
+	F-statistic:   255 on 2 and 28 DF,  p-value: < 2.2e-16
+
+```
